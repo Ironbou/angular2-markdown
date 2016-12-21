@@ -38,16 +38,15 @@
 			text-align: center;
 		}
 
-		#markdown-area{
-			height:500px;
+		#markdown-area, #markdown-output{
+			height:472px;
 			width:400px;
+			word-wrap: break-word; 
 		}
 
-		#markdown-output{
+		.col-md-6, .card{
 			height:500px;
 			width:400px;
-		}
-
-		div {
 			word-wrap: break-word;
+			margin-left:100px
 		}
