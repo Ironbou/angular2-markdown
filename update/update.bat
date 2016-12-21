@@ -1,0 +1,12 @@
+call npm install @angular/common --save
+call npm install @angular/compiler --save
+call npm install @angular/core --save
+call npm install @angular/forms --save
+call npm install @angular/http --save
+call npm install @angular/platform-browser --save
+call npm install @angular/platform-browser-dynamic --save
+call npm install @angular/router --save
+call npm install core-js --save
+call npm install ejs --save
+call npm install rxjs --save
+call npm install zone.js --save

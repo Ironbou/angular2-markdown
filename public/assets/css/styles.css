@@ -1,0 +1,39 @@
+		.cardtmp {
+  		padding: 0.10rem;
+			position: relative;
+			background-color: #fff;
+			border: 0px solid rgba(0, 0, 0, 0.125);
+  		border-radius: 0.25rem;
+			-webkit-transition: all .2s ease-in-out;
+			-o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
+			display: inline-block;
+			font-size:24px;
+			color:#3F729B;
+		}
+
+		.paneltmp {
+  		padding: 0.25rem;
+			position: relative;
+  		background-color: #fff;
+  		border: 1px solid #ddd;
+  		-webkit-transition: all .2s ease-in-out;
+  		-o-transition: all .2s ease-in-out;
+  		transition: all .2s ease-in-out;
+  		display: inline-block;
+  		max-width: 100%;
+		}
+
+		.card-texttmp {
+			padding: 0.05rem;
+			position: relative;
+			background-color: #fff;
+			font-size:8px;
+			border: 0px solid #ddd;
+  		border-radius: 0.25rem;
+			-webkit-transition: all .2s ease-in-out;
+			-o-transition: all .2s ease-in-out;
+			transition: all .2s ease-in-out;
+			color:#3F729B;
+			text-align: center;
+		}
