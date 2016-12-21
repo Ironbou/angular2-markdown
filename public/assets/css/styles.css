@@ -37,3 +37,17 @@
 			color:#3F729B;
 			text-align: center;
 		}
+
+		#markdown-area{
+			height:500px;
+			width:400px;
+		}
+
+		#markdown-output{
+			height:500px;
+			width:400px;
+		}
+
+		div {
+			word-wrap: break-word;
+		}
