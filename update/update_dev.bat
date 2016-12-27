@@ -1,3 +1,4 @@
+    call npm install @types/marked --save-dev
     call npm install @types/node --save-dev
     call npm install angular2-router-loader --save-dev
     call npm install angular2-template-loader --save-dev

@@ -17,4 +17,5 @@ import { EditModule } from '../../components/edit.module';
   providers: [],
 })
 
-export class angular2Module { }
+export class angular2Module {
+}

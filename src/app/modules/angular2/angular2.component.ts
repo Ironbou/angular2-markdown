@@ -6,4 +6,4 @@ import { Component} from '@angular/core';
 })
 
 export class angular2Component {
-};
+}

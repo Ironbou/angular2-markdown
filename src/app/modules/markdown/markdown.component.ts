@@ -4,7 +4,7 @@ import { MarkdownParserService } from './markdown.service';
 
 @Component({
   selector: 'markdown',
-  templateUrl: './markdown.component.html',
+  templateUrl: './markdown.component.html', 
   providers: [ MarkdownParserService ],
 })
 

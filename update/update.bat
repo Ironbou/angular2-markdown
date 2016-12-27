@@ -8,5 +8,6 @@ call npm install @angular/platform-browser-dynamic --save
 call npm install @angular/router --save
 call npm install core-js --save
 call npm install ejs --save
+call npm install marked --save
 call npm install rxjs --save
 call npm install zone.js --save
