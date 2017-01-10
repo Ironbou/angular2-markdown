@@ -1,59 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="col-md-4">
+    <div class="widget-wrapper">
+        <h4>Documentation :</h4>
+        <br>
+        <div class="list-group">
+            <a class="list-group-item" (click)="showMe(0)">Node</a>
+            <a class="list-group-item" (click)="showMe(1)">Angular 2</a>
+            <a class="list-group-item" (click)="showMe(2)">Webpack</a>
+            <a class="list-group-item" (click)="showMe(3)">Warning</a>
+            <a class="list-group-item" (click)="showMe(4)">Danger</a>
+        </div>
+    </div>
+</div>
+<div class="col-md-8">
+    <div class="row">
+        <div class="col-md-12">
+            <a class="fa fa-times" aria-hidden="true" *ngIf="hide" (click)="hideMe()"></a>
+            <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" *ngIf="hide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-
-    <!-- Bootstrap core CSS
-    <link href="../../../public/assets/css/bootstrap.min.css" rel="stylesheet">
-
-     Material Design Bootstrap 
-    <link href="../../../public/assets/css/mdb.min.css" rel="stylesheet"> -->
-
-    <!-- Template styles -->
-    <style rel="stylesheet">
-        /* TEMPLATE STYLES */
-        
-        main {
-            padding-top: 3rem;
-            padding-bottom: 2rem;
-        }
-
-        .col-md-6 {
-            margin-left:20%;
-            box-shadow: 1px 1px 12px #555;
-            width:auto; height:auto; position: absolute;
-        }
-
-
-    </style>
-</head>
-
-<body>
-
-    <main>
-
-        <div class="container">
-            <div class="row">
-
-                    <div class="col-md-6">
-                        <p><b>aaaaaaaaaaaaAngular Modules</b> {{toto}} help organize an application into cohesive blocks of functionality.</p>
-
-                        <p>An Angular Module is a class adorned with the <b>@NgModule</b> decorator function. <b>@NgModule</b> takes a metadata object that tells Angular how to compile and run module code. It identifies the module's own components, directives and pipes, making some of them public so external components can use them. It may add service providers to the application dependency injectors. And there are many more options covered here.</p>
+                        <img src="{{angular2Url}}">
+                        <div class="carousel-caption">
+                            <br>
+                        </div>
                     </div>
-                
+                </div>
             </div>
         </div>
+    </div>
+    <br>
+    <div class="col-md-12" *ngIf="hide">
+        <textarea [(ngModel)]="test" style="overflow: hidden" autosize></textarea>
+    </div>
 
-    </main>
-
-
-</body>
-
-</html>
+</div>

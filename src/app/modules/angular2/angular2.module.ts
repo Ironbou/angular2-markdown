@@ -1,21 +1,26 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { angular2Component } from './angular2.component';
-import { angular2RoutingModule } from './angular2.routing.module';
+import { Angular2Component } from './angular2.component';
+import { Angular2RoutingModule } from './angular2.routing.module';
 import { EditModule } from '../../components/edit.module';
+import { Autosize } from './angular2.autosize';
 
 @NgModule({
   imports: [
-    angular2RoutingModule,
+    CommonModule,
+    FormsModule,
+    Angular2RoutingModule,
     EditModule,
   ],
   exports: [
   ],
   declarations: [
-    angular2Component,
+    Autosize,
+    Angular2Component
   ],
   providers: [],
 })
 
-export class angular2Module {
-}
+export class angular2Module { }
