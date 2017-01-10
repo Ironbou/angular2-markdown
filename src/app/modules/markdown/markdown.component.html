@@ -16,9 +16,9 @@
 <div class="container">
             <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="md">
 
-                    <div class="card">
+                    <div class="card" id="md">
                          <h5>MarkDown</h5>
                          <textarea name="markdown" id="markdown-area" rows="30" placeholder="Enter your markdown here" (keyup)="updateOutput($event.target.value)"></textarea>
                     </div>
@@ -27,9 +27,9 @@
 
 
 
-                <div class="col-md-6">
+                <div class="col-md-6" id="md">
 
-                    <div class="card">
+                    <div class="card" id="md">
                         <h5>Output</h5>
                         <div id="markdown-output" [innerHtml]="convertedText">{{ convertedText }}</div>
                     </div>

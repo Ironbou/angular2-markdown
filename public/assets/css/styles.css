@@ -44,7 +44,7 @@
 			word-wrap: break-word; 
 		}
 
-		.col-md-6, .card{
+		#md{
 			height:500px;
 			width:400px;
 			word-wrap: break-word;
