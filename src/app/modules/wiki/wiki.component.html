@@ -19,7 +19,7 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
 
-                        <img src="{{angular2Url}}">
+                        <img src="{{wikiUrl}}">
                         <div class="carousel-caption">
                             <br>
                         </div>
@@ -30,7 +30,11 @@
     </div>
     <br>
     <div class="col-md-12" *ngIf="hide">
-        <textarea [(ngModel)]="test" style="overflow: hidden" autosize></textarea>
+        <textarea [(ngModel)]="test" style="overflow: hidden" (keyup)="this.updateOutput(this.test)" autosize></textarea>
     </div>
+    <div class="col-md-12" *ngIf="hide">
+        <h5>Output</h5>
+        <div [innerHtml]="convertedText">{{ convertedText }}</div>
+    </div>    
 
 </div>

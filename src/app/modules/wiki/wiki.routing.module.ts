@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { Angular2Component } from './angular2.component';
+import { WikiComponent } from './wiki.component';
 
 const routes: Routes = [
-  { path: '', component: Angular2Component },
+  { path: '', component: WikiComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class Angular2RoutingModule { }
+export class WikiRoutingModule { }
