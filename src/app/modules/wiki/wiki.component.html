@@ -14,27 +14,52 @@
 <div class="col-md-8">
     <div class="row">
         <div class="col-md-12">
-            <a class="fa fa-times" aria-hidden="true" *ngIf="hide" (click)="hideMe()"></a>
-            <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" *ngIf="hide" data-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
+            <nav class="navbar form-header grid-form-header primary-color white-text">
+                <div class="container-fluid">
+                    <div class="navbar-brand">
+                        <button type="button" class="btn btn-primary" *ngIf="hidemanuel" (click)="hidediv()">Conversion manuel</button>
+                        <button type="button" class="btn btn-primary" *ngIf="hideauto" (click)="hidediv()">Conversion auto</button>
+                    </div>
+                    <form class="form-inline">
+                        <div class="btn-group">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Librairie</button>
 
-                        <img src="{{wikiUrl}}">
-                        <div class="carousel-caption">
-                            <br>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Markdown</a>
+                                <a class="dropdown-item" href="#">Showdown</a>
+                                <a class="dropdown-item" href="#">Git flavored markdown</a>
+                            </div>
                         </div>
+                    </form>
+                </div>
+            </nav>
+            <div class="col-md-12" *ngIf="hide">
+                <div class="card">
+                    <div class="card-block">
+                        <nav class="navbar form-header grid-form-header primary-color white-text">
+                            <div class="container-fluid">
+                                <div class="navbar-brand">
+                                    <a class="fa fa-times" aria-hidden="true" *ngIf="hide" (click)="hideMe()"></a>
+                                    {{title}}
+                                </div>
+                                <form class="form-inline">
+
+                                </form>
+                            </div>
+                        </nav>
+                        <img src="{{wikiUrl}}">
+
+                        <textarea [(ngModel)]="test" class="tzone" style="overflow: hidden" *ngIf="hideauto" autosize></textarea>
+                        <textarea [(ngModel)]="test" class="tzone" style="overflow: hidden" *ngIf="hidemanuel" (keyup)="this.updateOutput(this.test)"
+                            autosize></textarea>
+
+                        <button type="button" *ngIf="hideauto" (click)="this.updateOutput(this.test)" class="btn btn-primary">Convertir</button>
+
+                        <div class="tzone" [innerHtml]="convertedText">{{ convertedText }}</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-    <div class="col-md-12" *ngIf="hide">
-        <textarea [(ngModel)]="test" style="overflow: hidden" (keyup)="this.updateOutput(this.test)" autosize></textarea>
-    </div>
-    <div class="col-md-12" *ngIf="hide">
-        <h5>Output</h5>
-        <div [innerHtml]="convertedText">{{ convertedText }}</div>
-    </div>    
 
 </div>
