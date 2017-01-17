@@ -16,47 +16,69 @@
         <div class="col-md-12">
             <nav class="navbar form-header grid-form-header primary-color white-text">
                 <div class="container-fluid">
-                    <div class="navbar-brand">
-                        <button type="button" class="btn btn-primary" *ngIf="hidemanuel" (click)="hidediv()">Conversion manuel</button>
-                        <button type="button" class="btn btn-primary" *ngIf="hideauto" (click)="hidediv()">Conversion auto</button>
-                    </div>
-                    <form class="form-inline">
-                        <div class="btn-group">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Librairie</button>
-
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Markdown</a>
-                                <a class="dropdown-item" href="#">Showdown</a>
-                                <a class="dropdown-item" href="#">Git flavored markdown</a>
+                    <ul class="nav nav-tabs md-pills pills-ins" role="tablist">
+                        <div class="container-fluid">
+                            <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-list-alt"></i></button>
+                            <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-search"></i></button>
+                            <div class="btn-group float-xs-left" role="group">
+                                <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-chevron-left"></i></button>
+                                <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-chevron-right"></i></button>
                             </div>
+                            <div class="btn-group float-xs-left" role="group">
+                                <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-minus"></i></button>
+                                <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-plus"></i></button>
+                            </div>
+                            <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-font"></i></button>
+                            <div class="btn-group float-xs-left" role="group">
+                                <button type="button" class="btn btn-primary btn-sm" *ngIf="hidemanuel" (click)="hidediv()">Conversion manuel</button>
+                                <button type="button" class="btn btn-primary btn-sm" *ngIf="hideauto" (click)="hidediv()">Conversion auto</button>
+                            </div>
+                            <form class="form-inline">
+                                <div class="btn-group">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Librairie</button>
+
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Markdown</a>
+                                        <a class="dropdown-item" href="#">Showdown</a>
+                                        <a class="dropdown-item" href="#">Git flavored markdown</a>
+                                        <a class="dropdown-item">CommonMark</a>
+                                        <a class="dropdown-item">Remarkable</a>
+                                        <a class="dropdown-item">Markdown-it</a>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-print"></i></button>
+                                <button type="button" class="btn btn-default navbar-btn float-xs-left waves-effect waves-light primary-color"><i class="fa fa-download"></i></button>
+                            </form>
                         </div>
-                    </form>
+                    </ul>
                 </div>
             </nav>
-            <div class="col-md-12" *ngIf="hide">
-                <div class="card">
-                    <div class="card-block">
-                        <nav class="navbar form-header grid-form-header primary-color white-text">
-                            <div class="container-fluid">
-                                <div class="navbar-brand">
-                                    <a class="fa fa-times" aria-hidden="true" *ngIf="hide" (click)="hideMe()"></a>
-                                    {{title}}
-                                </div>
-                                <form class="form-inline">
+            <ul class="nav nav-tabs tabs-3 primary-color" id="nav-pills" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#panel11" role="tab">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#panel12" role="tab">Follow</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#panel13" role="tab">Contact</a>
+                </li>
+            </ul>
 
-                                </form>
-                            </div>
-                        </nav>
-                        <img src="{{wikiUrl}}">
+            <div class="tab-content card" *ngIf="hide">
+                <a class="fa fa-times" aria-hidden="true" *ngIf="hide" (click)="hideMe()"></a>
+                <div class="tab-pane fade in active" id="panel11" role="tabpanel">
+                    <textarea [(ngModel)]="test" *ngIf="hideauto" autosize></textarea>
+                    <textarea [(ngModel)]="test" *ngIf="hidemanuel" (keyup)="this.updateOutput(this.test)" autosize></textarea>
+                    <button type="button" *ngIf="hideauto" (click)="this.updateOutput(this.test)" class="btn btn-primary">Convertir</button>
+                </div>
 
-                        <textarea [(ngModel)]="test" class="tzone" style="overflow: hidden" *ngIf="hideauto" autosize></textarea>
-                        <textarea [(ngModel)]="test" class="tzone" style="overflow: hidden" *ngIf="hidemanuel" (keyup)="this.updateOutput(this.test)"
-                            autosize></textarea>
-
-                        <button type="button" *ngIf="hideauto" (click)="this.updateOutput(this.test)" class="btn btn-primary">Convertir</button>
-
-                        <div class="tzone" [innerHtml]="convertedText">{{ convertedText }}</div>
-                    </div>
+                <div class="tab-pane fade" id="panel12" role="tabpanel">
+                    <div [innerHtml]="convertedText">{{ convertedText }}</div>
+                    <button type="button" *ngIf="hideauto" (click)="this.updateOutput(this.test)" class="btn btn-primary">Convertir</button>
+                </div>
+                <div class="tab-pane fade" id="panel13" role="tabpanel">
+                    <p>toto</p>
                 </div>
             </div>
         </div>

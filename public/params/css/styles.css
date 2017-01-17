@@ -51,9 +51,13 @@
 			margin-left:100px
 		}
 
-		.card {
-			margin-top:50px;
+		#right {
+    		float:right;
+    		width:100px;
 		}
-		.tzone {
-			margin-top:20px;
+
+		.navbar-btn {
+    		margin-top: 0px;
+    		margin-bottom: 0px;
+    		padding: .6rem 1rem;
 		}
