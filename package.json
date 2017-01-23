@@ -19,11 +19,13 @@
     "@angular/platform-browser": "^2.4.1",
     "@angular/platform-browser-dynamic": "^2.4.1",
     "@angular/router": "^3.4.1",
+    "@types/showdown": "^1.4.31",
     "angular2-autosize": "^1.0.1",
     "core-js": "^2.4.1",
     "ejs": "^2.5.5",
     "marked": "^0.3.6",
     "rxjs": "^5.0.2",
+    "showdown": "^1.6.0",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
