@@ -42,23 +42,23 @@ export class WikiComponent {
         this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, this.test.length);
       }
       else {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '**' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '**' + this.test.slice(this.userProfile.nativeElement.selectionEnd, 9999);
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '**' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '**' + this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
       }
     }
     if (font == LayoutEngine.DocumentFormat.Italic) {
       if (this.test.slice(this.userProfile.nativeElement.selectionStart - 2, this.userProfile.nativeElement.selectionEnd + 2) == '*' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '*') {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, 9999);
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, this.test.length);
       }
       else {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '*' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '*' + this.test.slice(this.userProfile.nativeElement.selectionEnd, 9999);
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '*' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '*' + this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
       }
     }
     if (font == LayoutEngine.DocumentFormat.Strikethrough) {
       if (this.test.slice(this.userProfile.nativeElement.selectionStart - 2, this.userProfile.nativeElement.selectionEnd + 2) == '~~' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '~~') {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, 9999);
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, this.test.length);
       }
       else {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '~~' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '~~' + this.test.slice(this.userProfile.nativeElement.selectionEnd, 9999);
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '~~' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '~~' + this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
       }
     }
     this.updateOutput(this.test)
