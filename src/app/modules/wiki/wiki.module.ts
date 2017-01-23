@@ -24,3 +24,17 @@ import { Autosize } from './wiki.autosize';
 })
 
 export class WikiModule { }
+
+export module LayoutEngine {
+
+    export enum DocumentFormat {
+        Bold = 0,
+        Italic = 1,
+        Strikethrough = 2
+    };
+
+    export class DocHeader {
+
+        public format : DocumentFormat;
+    }
+}
