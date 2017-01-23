@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 
 import { MarkdownParserService } from './wiki.service';
 
-import {Converter} from "showdown";
-var showdown  = require('showdown');
+import { Converter } from "showdown";
+var showdown = require('showdown');
 
 
 
@@ -15,7 +15,7 @@ var showdown  = require('showdown');
 
 export class WikiComponent {
 
-  private test: string="";
+  private test: string = "";
   private hide: boolean = false;
 
   private hidemanuel: boolean = true;
@@ -28,37 +28,57 @@ export class WikiComponent {
   private converter = new showdown.Converter();
   private html: string;
 
-   @ViewChild('t') userProfile: any;
+  @ViewChild('t') userProfile: any;
 
   constructor(private md: MarkdownParserService) {
 
   }
 
-    onSelect() {
-    if (this.test.slice(this.userProfile.nativeElement.selectionStart-2, this.userProfile.nativeElement.selectionEnd+2) == '**' +this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '**') {
-    this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart-2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd+2, 9999);
-    }
-    else {
+  onSelect(font: number) {
+    // enum
+    // class
+    enum f {Bold, Italic, Strikethrough};
+    if (font == 0) {
+      if (this.test.slice(this.userProfile.nativeElement.selectionStart - 2, this.userProfile.nativeElement.selectionEnd + 2) == '**' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '**') {
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, 9999);
+      }
+      else {
         this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '**' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '**' + this.test.slice(this.userProfile.nativeElement.selectionEnd, 9999);
+      }
     }
+    if (font == 1) {
+      if (this.test.slice(this.userProfile.nativeElement.selectionStart - 2, this.userProfile.nativeElement.selectionEnd + 2) == '*' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '*') {
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, 9999);
+      }
+      else {
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '*' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '*' + this.test.slice(this.userProfile.nativeElement.selectionEnd, 9999);
+      }
+    }
+    if (font == 2) {
+      if (this.test.slice(this.userProfile.nativeElement.selectionStart - 2, this.userProfile.nativeElement.selectionEnd + 2) == '~~' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '~~') {
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, 9999);
+      }
+      else {
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '~~' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '~~' + this.test.slice(this.userProfile.nativeElement.selectionEnd, 9999);
+      }
+    }
+    this.updateOutput(this.test)
+  }
 
-    this.updateOutput(this.test) 
-}
-
-    updateOutput(mdText: string) {
-      this.convertedText = this.md.convert(mdText);
-      this.html = this.converter.makeHtml(mdText);
+  updateOutput(mdText: string) {
+    this.convertedText = this.md.convert(mdText);
+    this.html = this.converter.makeHtml(mdText);
   }
 
   hidediv() {
-    if (this.hidemanuel==true) {
-    this.hidemanuel = false
-    this.hideauto = true   
-  } else if (this.hidemanuel==false) {
-    this.hidemanuel = true
-    this.hideauto = false
-    this.updateOutput(this.test) 
-  }
+    if (this.hidemanuel == true) {
+      this.hidemanuel = false
+      this.hideauto = true
+    } else if (this.hidemanuel == false) {
+      this.hidemanuel = true
+      this.hideauto = false
+      this.updateOutput(this.test)
+    }
 
   }
 
@@ -67,12 +87,12 @@ export class WikiComponent {
     this.test = '';
   }
 
-    libShow(nbr: number) {
+  libShow(nbr: number) {
     if (nbr == 0) {
-       this.libconverter = nbr;
+      this.libconverter = nbr;
     }
     else if (nbr == 1) {
-        this.libconverter = nbr;
+      this.libconverter = nbr;
     }
   }
 
