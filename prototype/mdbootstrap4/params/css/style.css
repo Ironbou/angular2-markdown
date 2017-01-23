@@ -1,0 +1,37 @@
+#btn-pills {
+    color: white;
+}
+
+#nav-pills {
+    background-color: #3F729B;
+}
+
+#btn-icon {
+    height: 30px;
+    width: 30px;
+}
+
+.navbar-btn {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: .6rem 1rem;
+}
+
+.a {
+    background-color: red;
+}
+
+.b {
+    background-color: blue;
+}
+
+.ab {
+    background-color: yellow;
+}
+
+.abc {
+    background-color: green;
+}
+.abcd {
+    background-color: purple;
+}

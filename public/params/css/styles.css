@@ -61,3 +61,11 @@
     		margin-bottom: 0px;
     		padding: .6rem 1rem;
 		}
+		
+		#btn-pills {
+    		color: white;
+		}
+
+		body {
+			background-color: #E3E3E3;
+		}
