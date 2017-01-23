@@ -2,8 +2,8 @@
 # 21/12/2016
 
 # config
-Node.js / Version v6.9.1
-npm / Version 4.0.2
+Node.js : Version v6.9.1
+npm : Version 4.0.2
 
 
 # installation
