@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { WikiComponent } from './wiki.component';
 import { WikiRoutingModule } from './wiki.routing.module';
 import { EditModule } from '../../components/edit.module';
-import { WikiAutosizeDirective,Font } from "./index";
+import { WikiAutosizeDirective,FontStyle,FontSize } from "./index";
 
 @NgModule({
   imports: [

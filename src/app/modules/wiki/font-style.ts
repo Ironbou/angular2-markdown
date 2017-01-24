@@ -1,4 +1,4 @@
-export enum Font {
+export enum FontStyle {
     Bold = 0,
     Italic = 1,
     Strikethrough = 2,

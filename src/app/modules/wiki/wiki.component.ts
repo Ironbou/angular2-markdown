@@ -2,7 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 
 import {
   WikiService,
-  Font
+  FontStyle,
+  FontSize
 } from "./index";
 
 import { Converter } from "showdown";
@@ -17,7 +18,7 @@ var showdown = require('showdown');
 
 export class WikiComponent {
   private test: string = "";
-  private textLink: string ="";
+  private textLink: string = "";
   private hide: boolean = false;
   private hidemanuel: boolean = true;
   private hideauto: boolean = false;
@@ -32,45 +33,86 @@ export class WikiComponent {
     private md: WikiService) {
   }
 
+
+  removeTitle() {
+    var character = /#/gi;
+    // gi = global and ignore, ce qui permet de remplacer pour chaque '#'
+    var selection = this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd);
+    //la variable recupere le texte selectionné
+    var newselection = selection.replace(character, '');
+    newselection = newselection.replace(' ','')
+    
+    //la fonction replace va remplacer par du vide, tout les caracteres defini dans la variable 'character'
+    this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) +
+    newselection +
+    this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+  }
+
+  addTitle(titleSize: FontSize) {
+    var size: string;
+    if (titleSize == FontSize.Title1) {
+      size = '#' + ' ';
+    }
+    if (titleSize == FontSize.Title2) {
+      size = '##' + ' ';
+    }
+    if (titleSize == FontSize.Title3) {
+      size = '###' + ' ';
+    }
+    if (titleSize == FontSize.Title4) {
+      size = '####' + ' ';
+    }
+    if (titleSize == FontSize.Title5) {
+      size = '#####' + ' ';
+    }
+    if (titleSize == FontSize.Title6) {
+      size = '######' + ' ';
+    }
+    this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + size +
+      this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) +
+      this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+    this.updateOutput(this.test);
+  }
+
   addLink() {
-     this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '[' + 
-     this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '](' + this.textLink + ')' + 
-     this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
-     this.updateOutput(this.test);
-     this.textLink='';
+    this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '[' +
+      this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '](' + this.textLink + ')' +
+      this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+    this.updateOutput(this.test);
+    this.textLink = '';
   }
 
   addCharacters(fontnumber: number) {
     var delimiter: string;
     var nb: number;
-    if (fontnumber == Font.Bold) {
+    if (fontnumber == FontStyle.Bold) {
       delimiter = '**';
-      nb=2;
+      nb = 2;
     }
-    if (fontnumber == Font.Italic) {
+    if (fontnumber == FontStyle.Italic) {
       delimiter = '*';
-      nb=1;
+      nb = 1;
     }
-    if (fontnumber == Font.Strikethrough) {
+    if (fontnumber == FontStyle.Strikethrough) {
       delimiter = '~~';
-      nb=2;
+      nb = 2;
     }
-    if (this.test.slice(this.userProfile.nativeElement.selectionStart - nb, this.userProfile.nativeElement.selectionEnd + nb) == delimiter + 
-        this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + delimiter) {
-      this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - nb) + '' + 
-      this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + 
-      this.test.slice(this.userProfile.nativeElement.selectionEnd + nb, this.test.length);
+    if (this.test.slice(this.userProfile.nativeElement.selectionStart - nb, this.userProfile.nativeElement.selectionEnd + nb) == delimiter +
+      this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + delimiter) {
+      this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - nb) + '' +
+        this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' +
+        this.test.slice(this.userProfile.nativeElement.selectionEnd + nb, this.test.length);
       // Si le texte selectionné + nb caractere avant et apres sont égal a 'delimiter textSelectionné delimiter', le code supprime les 'delimiter'
     }
     else {
-      this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + delimiter + 
-      this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + delimiter + 
-      this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+      this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + delimiter +
+        this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + delimiter +
+        this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
       // Sinon il ajoute les delimiter avant et apres le texte selectioné
     }
   }
 
-  onSelect(font: Font) {
+  onSelect(font: FontStyle) {
     this.addCharacters(font);
     this.updateOutput(this.test)
   }

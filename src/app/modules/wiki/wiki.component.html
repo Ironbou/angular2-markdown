@@ -42,6 +42,18 @@
                                         <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" (click)="onSelect(1)"><i class="fa fa-italic" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" (click)="onSelect(2)"><i class="fa fa-strikethrough" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" data-toggle="modal" data-target="#myModal"><i class="fa fa-chain" aria-hidden="true"></i></button>
+                                        <div class="btn-group">
+                                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Titre</button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" (click)="addTitle(1)"><h1>Titre 1</h1></a>
+                                                <a class="dropdown-item" (click)="addTitle(2)"><h2>Titre 2</h2></a>
+                                                <a class="dropdown-item" (click)="addTitle(3)"><h3>Titre 3</h3></a>
+                                                <a class="dropdown-item" (click)="addTitle(4)"><h4>Titre 4</h4></a>
+                                                <a class="dropdown-item" (click)="addTitle(5)"><h5>Titre 5</h5></a>
+                                                <a class="dropdown-item" (click)="addTitle(6)"><h6>Titre 6</h6></a>
+                                                <a class="dropdown-item" (click)="removeTitle()"><p>Paragraphe</p></a>
+                                            </div>
+                                        </div>
                                     </div>
 
 
