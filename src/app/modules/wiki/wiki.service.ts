@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import * as marked from 'marked';
 
 @Injectable()
-export class MarkdownParserService {
+export class WikiService {
 
 private md: MarkedStatic
 

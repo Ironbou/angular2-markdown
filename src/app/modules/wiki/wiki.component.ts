@@ -1,66 +1,77 @@
 import { Component, ViewChild } from '@angular/core';
-import { LayoutEngine } from './wiki.module';
 
-import { MarkdownParserService } from './wiki.service';
+import {
+  WikiService,
+  Font
+} from "./index";
 
 import { Converter } from "showdown";
 var showdown = require('showdown');
 
 
-
 @Component({
   selector: 'wiki',
   templateUrl: './wiki.component.html',
-  providers: [MarkdownParserService],
+  providers: [WikiService],
 })
 
 export class WikiComponent {
-
   private test: string = "";
+  private textLink: string ="";
   private hide: boolean = false;
-
   private hidemanuel: boolean = true;
   private hideauto: boolean = false;
-
   private convertedText: string;
-
   private libconverter: number = 0;
-
   private converter = new showdown.Converter();
   private html: string;
 
   @ViewChild('t') userProfile: any;
 
-  constructor(private md: MarkdownParserService) {
-
+  constructor(
+    private md: WikiService) {
   }
 
-  onSelect(font: LayoutEngine.DocumentFormat) {
-    console.log(font);
-    if (font == LayoutEngine.DocumentFormat.Bold) {
-      if (this.test.slice(this.userProfile.nativeElement.selectionStart - 2, this.userProfile.nativeElement.selectionEnd + 2) == '**' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '**') {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, this.test.length);
-      }
-      else {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '**' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '**' + this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
-      }
+  addLink() {
+     this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '[' + 
+     this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '](' + this.textLink + ')' + 
+     this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+     this.updateOutput(this.test);
+     this.textLink='';
+  }
+
+  addCharacters(fontnumber: number) {
+    var delimiter: string;
+    var nb: number;
+    if (fontnumber == Font.Bold) {
+      delimiter = '**';
+      nb=2;
     }
-    if (font == LayoutEngine.DocumentFormat.Italic) {
-      if (this.test.slice(this.userProfile.nativeElement.selectionStart - 2, this.userProfile.nativeElement.selectionEnd + 2) == '*' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '*') {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, this.test.length);
-      }
-      else {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '*' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '*' + this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
-      }
+    if (fontnumber == Font.Italic) {
+      delimiter = '*';
+      nb=1;
     }
-    if (font == LayoutEngine.DocumentFormat.Strikethrough) {
-      if (this.test.slice(this.userProfile.nativeElement.selectionStart - 2, this.userProfile.nativeElement.selectionEnd + 2) == '~~' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '~~') {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - 2) + '' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + this.test.slice(this.userProfile.nativeElement.selectionEnd + 2, this.test.length);
-      }
-      else {
-        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '~~' + this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '~~' + this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
-      }
+    if (fontnumber == Font.Strikethrough) {
+      delimiter = '~~';
+      nb=2;
     }
+    if (this.test.slice(this.userProfile.nativeElement.selectionStart - nb, this.userProfile.nativeElement.selectionEnd + nb) == delimiter + 
+        this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + delimiter) {
+      this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - nb) + '' + 
+      this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' + 
+      this.test.slice(this.userProfile.nativeElement.selectionEnd + nb, this.test.length);
+      // Si le texte selectionné + nb caractere avant et apres sont égal a 'delimiter textSelectionné delimiter', le code supprime les 'delimiter'
+    }
+    else {
+      this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + delimiter + 
+      this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + delimiter + 
+      this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+      // Sinon il ajoute les delimiter avant et apres le texte selectioné
+    }
+  }
+
+  onSelect(font: Font) {
+    this.addCharacters(font);
     this.updateOutput(this.test)
   }
 
@@ -86,7 +97,7 @@ export class WikiComponent {
     this.test = '';
   }
 
-  libShow(nbr: number) {
+  markupLanguage(nbr: number) {
     if (nbr == 0) {
       this.libconverter = nbr;
     }
@@ -117,7 +128,6 @@ export class WikiComponent {
       this.test = '';
       this.updateOutput(this.test)
     }
-
   }
 
 };
