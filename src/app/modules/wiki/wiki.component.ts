@@ -35,20 +35,27 @@ export class WikiComponent {
 
 
   removeTitle() {
-    var character = /#/gi;
-    // gi = global and ignore, ce qui permet de remplacer pour chaque '#'
+    var character = /#/g;
+    // gi = global and ignore, ce qui permet de selectionner chaque '#'
     var selection = this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd);
-    //la variable recupere le texte selectionné
-    var newselection = selection.replace(character, '');
-    newselection = newselection.replace(' ','')
-    
-    //la fonction replace va remplacer par du vide, tout les caracteres defini dans la variable 'character'
+    //la variable "selection" recupere le texte selectionné
+    if (selection.indexOf("#") >= 0) {
+      var newselection = selection.replace(' ', '');
+      newselection = newselection.replace(character, '');
+      selection = newselection;
+    }
+    //la fonction "replace" supprime tous les caracteres defini dans la variable 'character' +
+    //l'espace se trouvant entre le "#" et le texte selectionné, si, dans le texte selectionné il y a un "#"
     this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) +
-    newselection +
-    this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+      selection +
+      this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+    //test prend le texte avant et apres la selection + le contenu de "selection"
   }
 
   addTitle(titleSize: FontSize) {
+    if (this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd).indexOf("#") >= 0) {
+      this.removeTitle();
+    }
     var size: string;
     if (titleSize == FontSize.Title1) {
       size = '#' + ' ';
@@ -84,25 +91,25 @@ export class WikiComponent {
 
   addCharacters(fontnumber: number) {
     var delimiter: string;
-    var nb: number;
+    var selection = this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd);
     if (fontnumber == FontStyle.Bold) {
       delimiter = '**';
-      nb = 2;
+      var newselection = selection.replace(/\*\*/g, '');
     }
     if (fontnumber == FontStyle.Italic) {
       delimiter = '*';
-      nb = 1;
+      var newselection = selection.replace(/\*/g, '');
     }
     if (fontnumber == FontStyle.Strikethrough) {
       delimiter = '~~';
-      nb = 2;
+      var newselection = selection.replace(/~~/g, '');
     }
-    if (this.test.slice(this.userProfile.nativeElement.selectionStart - nb, this.userProfile.nativeElement.selectionEnd + nb) == delimiter +
-      this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + delimiter) {
-      this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart - nb) + '' +
-        this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '' +
-        this.test.slice(this.userProfile.nativeElement.selectionEnd + nb, this.test.length);
-      // Si le texte selectionné + nb caractere avant et apres sont égal a 'delimiter textSelectionné delimiter', le code supprime les 'delimiter'
+
+    if (this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd).indexOf(delimiter) >= 0) {
+        this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) +
+        newselection +
+        this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
+        // supprime tous les "~" et les "*" dans le texte selectionné
     }
     else {
       this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + delimiter +
