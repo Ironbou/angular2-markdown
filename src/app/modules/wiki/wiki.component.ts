@@ -78,14 +78,14 @@ export class WikiComponent {
     this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + size +
       this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) +
       this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
-    this.updateOutput(this.test);
+    this.updateManuel()
   }
 
   addLink() {
     this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '[' +
       this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '](' + this.textLink + ')' +
       this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
-    this.updateOutput(this.test);
+    this.updateManuel()
     this.textLink = '';
   }
 
@@ -94,18 +94,16 @@ export class WikiComponent {
     var selection = this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd);
     if (fontnumber == FontStyle.Bold) {
       delimiter = '**';
-      var newselection = selection.replace(/\*\*/g, '');
     }
     if (fontnumber == FontStyle.Italic) {
       delimiter = '*';
-      var newselection = selection.replace(/\*/g, '');
     }
     if (fontnumber == FontStyle.Strikethrough) {
       delimiter = '~~';
-      var newselection = selection.replace(/~~/g, '');
     }
 
     if (this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd).indexOf(delimiter) >= 0) {
+        var newselection = selection.replace(/~|\*\*/g, '');
         this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) +
         newselection +
         this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
@@ -121,7 +119,13 @@ export class WikiComponent {
 
   onSelect(font: FontStyle) {
     this.addCharacters(font);
-    this.updateOutput(this.test)
+    this.updateManuel()
+  }
+
+  updateManuel(){
+    if (this.hidemanuel == true){
+      this.updateOutput(this.test)
+    }
   }
 
   updateOutput(mdText: string) {
