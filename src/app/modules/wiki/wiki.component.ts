@@ -82,7 +82,11 @@ export class WikiComponent {
     this.updateManuel()
   }
 
-  position () {
+  resetPos() {
+    this.posCursor = '';
+  }
+
+  position() {
     if (this.userProfile.nativeElement.selectionStart == this.userProfile.nativeElement.selectionEnd) {
       this.posCursor = 'Position curseur : ' + (this.userProfile.nativeElement.selectionEnd + 1);
       // Affiche la position du curseur, le compteur commence à 1 (sans le +1, le compteur commencerai à 0)
