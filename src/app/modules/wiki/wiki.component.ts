@@ -26,6 +26,7 @@ export class WikiComponent {
   private libconverter: number = 0;
   private converter = new showdown.Converter();
   private html: string;
+  private posCursor: string;
 
   @ViewChild('t') userProfile: any;
 
@@ -81,8 +82,26 @@ export class WikiComponent {
     this.updateManuel()
   }
 
-  addLink() {
-    this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + '[' +
+  position () {
+    if (this.userProfile.nativeElement.selectionStart == this.userProfile.nativeElement.selectionEnd) {
+      this.posCursor = 'Position curseur : ' + (this.userProfile.nativeElement.selectionEnd + 1);
+      // Affiche la position du curseur, le compteur commence à 1 (sans le +1, le compteur commencerai à 0)
+    }
+  else {
+    this.posCursor = 'Debut de la selection : ' + (this.userProfile.nativeElement.selectionStart + 1) + ' Fin de la selection : ' + (this.userProfile.nativeElement.selectionEnd + 1);
+    // Affiche la position du début et de fin de la selection, le compteur commence à 1 (sans le +1, le compteur commencerai à 0)
+  }
+}
+
+  addLink(type: number) {
+    var char: string;
+    if (type == 0) {
+      char = "[";
+    }
+    else if (type == 1) {
+      char = "![";
+    }
+    this.test = this.test.slice(0, this.userProfile.nativeElement.selectionStart) + char +
       this.test.slice(this.userProfile.nativeElement.selectionStart, this.userProfile.nativeElement.selectionEnd) + '](' + this.textLink + ')' +
       this.test.slice(this.userProfile.nativeElement.selectionEnd, this.test.length);
     this.updateManuel()

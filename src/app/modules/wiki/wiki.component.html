@@ -41,7 +41,8 @@
                                         <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" (click)="onSelect(0)"><i class="fa fa-bold" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" (click)="onSelect(1)"><i class="fa fa-italic" aria-hidden="true"></i></button>
                                         <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" (click)="onSelect(2)"><i class="fa fa-strikethrough" aria-hidden="true"></i></button>
-                                        <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" data-toggle="modal" data-target="#myModal"><i class="fa fa-chain" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" data-toggle="modal" data-target="#linkModal"><i class="fa fa-chain" aria-hidden="true"></i></button>
+                                        <button type="button" class="btn btn-default navbar-btn  waves-effect waves-light primary-color" data-toggle="modal" data-target="#pictureModal"><i class="fa fa-photo" aria-hidden="true"></i></button>
                                         <div class="btn-group">
                                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Titre</button>
                                             <div class="dropdown-menu">
@@ -104,30 +105,43 @@
 
                 <div class="tab-content card" *ngIf="hide">
                     <a class="fa fa-times" aria-hidden="true" *ngIf="hide" (click)="hideMe()"></a>
-                    <div class="tab-pane fade in active" id="panel11" role="tabpanel">
+                    <button type="button" *ngIf="hideauto" (click)="this.updateOutput(this.test)" class="btn btn-primary">Convertir</button>
+                    <div>{{posCursor}}</div>
+                    <div class="tab-pane fade in active" (keyup)="position()" (click)="position()" id="panel11" role="tabpanel">
                         <textarea #t [(ngModel)]="test" *ngIf="hideauto" autosize></textarea>
                         <textarea #t [(ngModel)]="test" *ngIf="hidemanuel" (keyup)="this.updateOutput(this.test)" autosize></textarea>
-                        <button type="button" *ngIf="hideauto" (click)="this.updateOutput(this.test)" class="btn btn-primary">Convertir</button>
                     </div>
-
                     <div class="tab-pane fade" id="panel12" role="tabpanel">
                         <div [ngSwitch]="libconverter">
                             <div [innerHtml]="convertedText" *ngSwitchCase="0">{{ convertedText }}</div>
                             <div [innerHtml]="html" *ngSwitchCase="1">{{ html }}</div>
                         </div>
-                        <button type="button" *ngIf="hideauto" (click)="this.updateOutput(this.test)" class="btn btn-primary">Convertir</button>
                     </div>
                 </div>
-                <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+                <div id="linkModal" class="modal fade" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h3 class="modal-title">Link</h3>
+                                <h3 class="modal-title">Lien externe</h3>
                             </div>
                             <div class="modal-body">
-                                <textarea [(ngModel)]="textLink" placeholder="Enter your link"></textarea>
-                                <button type="button" class="btn btn-primary" (click)='addLink()' data-dismiss="modal">End</button>
+                                <textarea [(ngModel)]="textLink" placeholder="Entrer le lien externe"></textarea>
+                                <button type="button" class="btn btn-primary" (click)='addLink(0)' data-dismiss="modal">End</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="pictureModal" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title">Image</h3>
+                            </div>
+                            <div class="modal-body">
+                                <textarea [(ngModel)]="textLink" placeholder="Entrer le lien de l'image"></textarea>
+                                <button type="button" class="btn btn-primary" (click)='addLink(1)' data-dismiss="modal">End</button>
                             </div>
                         </div>
                     </div>

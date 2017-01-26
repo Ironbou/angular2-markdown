@@ -10,7 +10,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   loadScript(name: string) {
-    console.log('toto');
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = name;
