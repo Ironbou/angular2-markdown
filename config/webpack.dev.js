@@ -15,7 +15,9 @@ module.exports = webpackMerge(commonConfig, {
 
   plugins: [
     new ExtractTextPlugin('[name].css'),
-    new CopyWebpackPlugin([{ from: './public/assets', to: './assets' },{ from: './public/params', to: './params' }])
+    new CopyWebpackPlugin([{ from: './public/assets', to: './assets' }]),
+    new CopyWebpackPlugin([{ from: './public/params', to: './params' }]),
+    new CopyWebpackPlugin([{ from: './public/data', to: './data' }]),
   ],
 
   devServer: {

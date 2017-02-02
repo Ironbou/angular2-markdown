@@ -1,0 +1,88 @@
+aaaa
+
+<button type="button" class="btn btn-primary">Create</button>
+<button type="button" class="btn btn-primary" (click)="getItems()">Reads</button>
+<button type="button" class="btn btn-primary">Update</button>
+<button type="button" class="btn btn-primary">Delete</button>
+<table class="table table-bordered table-hover table-sm">
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="cardtmp" *ngFor="let item of items" (click)="onSelect(item,i)" (dblclick)="ondblclick()">
+				<a hef="">
+					<div class="card-texttmp"><b>{{item.name}}</b></div>
+				</a>
+			</div>
+
+
+
+
+<div class="card-header primary-color white-text">
+			<div class="switch pull-left" data-toggle="tooltip" data-placement="top" title="Click to see detail Form">
+				<label>
+	      		<input type="checkbox" [(ngModel)]="autoDetail" (click)="onClickAutoDetail()">
+  	    		<span class="lever"></span>
+    			</label>
+			</div>
+				<div class="switch pull-right">
+					<label>
+	      		<input type="checkbox" [(ngModel)]="autoSearch" (click)="onClickAutoSearch()">
+  	    		<span class="lever"></span>
+    			</label>
+				</div>
+		</div>
+
+
+
+
+
+
+<div class="col-sm-5" *ngIf="doShowMe">
+	<div class="card">
+		<h3 class="card-header primary-color white-text">toto
+			<a class="btn-floating blue" (click)="update(selectedItem)"><i class="fa fa-save"></i></a>
+			<a class="btn-floating red" (click)="delete(selectedItem)"><i class="fa fa-minus"></i></a>
+		</h3>
+		<div class="card-block" *ngIf="selectedItem">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="cardtmp">
+						<a hef="">
+							<div class="card-texttmp"><b>{{selectedItem.name}}</b></div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="md-form">
+						<i class="fa fa-user prefix"></i>
+						<input value="{{selectedItem.name}}" type="text" id="name" class="form-control" [(ngModel)]="selectedItem.name">
+						<label class="active" for="name">Name</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="md-form">
+						<i class="fa fa-file-archive-o prefix"></i>
+						<input value="{{selectedItem.id}}" type="text" id="id" class="form-control" [(ngModel)]="selectedItem.id">
+						<label class="active" for="id">Id</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

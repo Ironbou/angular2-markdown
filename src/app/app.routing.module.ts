@@ -8,6 +8,7 @@ const routes: Routes = [
 //	{ path: "**", redirectTo: "", pathMatch: "full" }
   { path: '', component:HomeComponent },
   { path: 'wiki', loadChildren: './modules/wiki/wiki.module#WikiModule' },
+  { path: 'wiki-list', loadChildren: './modules/wiki-list/wiki-list.module#WikiListModule' },
   { path: 'markdown', loadChildren: './modules/markdown/markdown.module#markdownModule' },
   { path: 'about', component:HomeComponent },
   { path: '**', component:HomeComponent },

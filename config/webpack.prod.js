@@ -31,7 +31,9 @@ module.exports = webpackMerge(commonConfig, {
       }
     }),
     new ExtractTextPlugin('[name].[hash].css'),
-    new CopyWebpackPlugin([{ from: './public/assets', to: './assets' },{ from: './public/params', to: './params' }]),
+    new CopyWebpackPlugin([{ from: './public/assets', to: './assets' }]),
+    new CopyWebpackPlugin([{ from: './public/params', to: './params' }]),
+    new CopyWebpackPlugin([{ from: './public/data', to: './data' }]),
     new webpack.DefinePlugin({
       'process.env': {
         'ENV': JSON.stringify(ENV)
