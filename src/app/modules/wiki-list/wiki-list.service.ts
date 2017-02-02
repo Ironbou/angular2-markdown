@@ -9,7 +9,7 @@ import { Item } from './item';
 export class WikiListService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.headers });
-  private itemsUrl: string = 'http://localhost:1001/api/languages';
+  private itemsUrl: string = 'http://api.ironbou.com/languages';
   constructor(
     private http: Http) {
       console.log('3333:WikiListService');
