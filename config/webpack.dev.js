@@ -23,11 +23,11 @@ module.exports = webpackMerge(commonConfig, {
   devServer: {
     historyApiFallback: true,
     stats: 'minimal',
-    inline: true,
-    colors: true,
-    contentBase: './dist',
+    // inline: true,
+    // colors: true,
+    // contentBase: './dist',
     port:7003,
-    publicPath: '/'
+    // publicPath: '/'
   }
 
 });

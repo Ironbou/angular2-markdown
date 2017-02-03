@@ -17,19 +17,33 @@ module.exports = webpackMerge(commonConfig, {
     chunkFilename: '[id].chunk.js'
   },
 
-  htmlLoader: {
-    minimize: false
-  },
+  // htmlLoader: {
+  //   minimize: false
+  // },
 
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({ 
+
+
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
       compress: { warnings: false },
       mangle: {
         keep_fnames: true
       }
     }),
+
+
+
+    // new webpack.NoErrorsPlugin(),
+    // new webpack.optimize.DedupePlugin(),
+    // new webpack.optimize.UglifyJsPlugin({ 
+    //   compress: { warnings: false },
+    //   mangle: {
+    //     keep_fnames: true
+    //   }
+    // }),
+
+
     new ExtractTextPlugin('[name].[hash].css'),
     new CopyWebpackPlugin([{ from: './public/assets', to: './assets' }]),
     new CopyWebpackPlugin([{ from: './public/params', to: './params' }]),

@@ -9,15 +9,14 @@ module.exports = {
     'polyfills': './src/polyfills.ts',
     'vendor': './src/vendor.ts',
     'app': './src/main.ts',
-    'index': './src/index.ts',
   },
 
   resolve: {
-    extensions: ['', '.js', '.ts']
+    extensions: ['.js', '.ts']
   },
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.ts$/,
         exclude: /node_modules/,
@@ -25,33 +24,53 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        loader: 'html'
+        loader: 'html-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file?name=assets/images/[name].[ext]'
+        loader: 'file-loader?name=assets/images/[name].[ext]'
       },
       {
         test: /\.css$/,
         exclude: helpers.root('src', 'app'),
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+        loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
       },
       {
         test: /\.css$/,
         include: helpers.root('src', 'app'),
-        loader: 'raw'
+        loader: 'raw-loader'
       }
     ]
   },
 
-  plugins: [
+
+
+      plugins: [
+    // Workaround for angular/angular#11580
+    new webpack.ContextReplacementPlugin(
+      // The (\\|\/) piece accounts for path separators in *nix and Windows
+      /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+      helpers.root('./src'), // location of your src
+      {} // a map of your routes
+    ),
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['app', 'index', 'vendor', 'polyfills']
+      name: ['app', 'vendor', 'polyfills']
     }),
 
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    new CheckerPlugin(), 
   ]
+
+
+  // plugins: [
+  //   new webpack.optimize.CommonsChunkPlugin({
+  //     name: ['app', 'index', 'vendor', 'polyfills']
+  //   }),
+
+  //   new HtmlWebpackPlugin({
+  //     template: 'src/index.html'
+  //   }),
+  //   new CheckerPlugin(), 
+  // ]
 };
